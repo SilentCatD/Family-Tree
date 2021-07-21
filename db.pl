@@ -160,8 +160,3 @@ firstCousin(X,Y):-
 	parent(Z1,X),
 	parent(Z2,Y),
 	sibling(Z1,Z2).
-
-
-
-
-

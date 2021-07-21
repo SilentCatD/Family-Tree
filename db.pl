@@ -108,3 +108,70 @@ grandmother(X, Y):-
 grandfather(X, Y):-
 	father(X, Z),
 	parent(Z, Y).
+
+grandchild(X,Y):-
+	child(X,Z),
+	child(Z,Y).
+
+grandson(X,Y):-
+	male(X),
+	grandchild(X,Y).
+
+granddaughter(X,Y):-
+	female(X),
+	grandchild(X,Y).
+
+spouse(X,Y):-
+	male(X),
+	female(Y),
+	married(X,Y).
+
+husband(X,Y):-
+	male(X),
+	married(X,Y).
+
+wife(X,Y):-
+	female(X),
+	married(X,Y).
+
+sibling(X,Y):-
+	child(X,Z),
+	child(Y,Z).
+
+brother(X,Y):-
+	male(X),
+	sibling(X,Y).
+
+sister(X,Y):-
+	female(X),
+	sibling(X,Y).
+
+aunt(X,Y):-
+	female(X),
+	sibling(X,Z),
+	parent(Z,Y).
+
+uncle(X,Y):-
+	male(X),
+	sibling(X,Z),
+	parent(Z,Y).
+
+nephew(X,Y):-
+	male(X),
+	aunt(Y,X);
+	uncle(Y,X).
+
+niece(X,Y):-
+	female(X),
+	aunt(Y,X);
+	uncle(Y,X).
+
+firstCousin(X,Y):-
+	parent(Z1,X),
+	parent(Z2,Y),
+	sibling(Z1,Z2).
+
+
+
+
+

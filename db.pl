@@ -136,7 +136,8 @@ wife(X,Y):-
 
 sibling(X,Y):-
 	child(X,Z),
-	child(Y,Z).
+	child(Y,Z),
+	dif(X, Y).
 
 brother(X,Y):-
 	male(X),

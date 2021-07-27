@@ -127,7 +127,7 @@ husband(X,Y):-
 	married(X,Y),
 	not(divorced(X, Y)).
 wife(X,Y):-
-	female(Y),
+	female(X),
 	married(X,Y),
 	not(divorced(X, Y)).
 sibling(X,Y):-

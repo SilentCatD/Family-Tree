@@ -120,17 +120,16 @@ granddaughter(X,Y):-
 	female(X),
 	grandchild(X,Y).
 spouse(X,Y):-
-	male(X),
-	female(Y),
-	married(X,Y).
+	husband(X, Y);
+	wife(Y, X).
 husband(X,Y):-
 	male(X),
 	married(X,Y),
-	\+ dirvoced(X, Y).
+	not(divorced(X, Y)).
 wife(X,Y):-
-	female(X),
+	female(Y),
 	married(X,Y),
-	\+ dirvoced(X, Y).
+	not(divorced(X, Y)).
 sibling(X,Y):-
 	mother(M, X),
 	mother(M, Y),

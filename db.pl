@@ -145,9 +145,17 @@ sister(X,Y):-
 aunt(X,Y):-
 	sister(X, Z),
 	parent(Z,Y).
+aunt(X,Y):-
+	wife(X, Z),
+	sibling(Z, W),
+	parent(W, Y).
 uncle(X,Y):-
 	brother(X, Z),
 	parent(Z,Y).
+uncle(X,Y):-
+	husband(X, Z),
+	sibling(Z, W),
+	parent(W, Y).
 nephew(X,Y):-
 	male(X),
 	aunt(Y,X).

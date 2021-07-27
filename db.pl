@@ -15,6 +15,7 @@ male(edward).
 male(peter).
 male(mike).
 male(james).
+male(archie).
 
 female(elizabeth).
 female(diana).
@@ -61,6 +62,8 @@ parent(edward, louise).
 parent(sophie, louise).
 parent(edward, james).
 parent(sophie, james).
+parent(harry, archie).
+parent(meghan, archie).
 
 married_to(elizabeth, philip).
 married_to(charles, camilla).
@@ -100,17 +103,16 @@ daughter(X, Y):-
 	female(X),
 	parent(Y, X).
 grandparent(X, Y):-
-	parent(X, Z),
+	child(Z, X),
 	parent(Z, Y).
 grandmother(X, Y):-
-	mother(X, Z),
-	parent(Z, Y).
+	grandparent(X, Y),
+	female(X).
 grandfather(X, Y):-
-	father(X, Z),
-	parent(Z, Y).
+	grandparent(X, Y),
+	male(X).
 grandchild(X,Y):-
-	child(X,Z),
-	child(Z,Y).
+	grandparent(Y, X).
 grandson(X,Y):-
 	male(X),
 	grandchild(X,Y).
@@ -123,10 +125,12 @@ spouse(X,Y):-
 	married(X,Y).
 husband(X,Y):-
 	male(X),
-	married(X,Y).
+	married(X,Y),
+	\+ dirvoced(X, Y).
 wife(X,Y):-
 	female(X),
-	married(X,Y).
+	married(X,Y),
+	\+ dirvoced(X, Y).
 sibling(X,Y):-
 	mother(M, X),
 	mother(M, Y),
@@ -141,20 +145,22 @@ sister(X,Y):-
 	female(X),
 	sibling(X,Y).
 aunt(X,Y):-
-	female(X),
-	sibling(X,Z),
+	sister(X, Z),
 	parent(Z,Y).
 uncle(X,Y):-
-	male(X),
-	sibling(X,Z),
+	brother(X, Z),
 	parent(Z,Y).
 nephew(X,Y):-
 	male(X),
-	aunt(Y,X);
+	aunt(Y,X).
+nephew(X,Y):-
+	male(X),
 	uncle(Y,X).
 niece(X,Y):-
 	female(X),
-	aunt(Y,X);
+	aunt(Y,X).
+niece(X,Y):-
+	female(X),
 	uncle(Y,X).
 firstCousin(X,Y):-
 	parent(Z1,X),

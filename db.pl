@@ -135,8 +135,7 @@ sibling(X,Y):-
 	mother(M, Y),
 	father(F, X),
 	father(F, Y),
-	dif(X, Y),
-	X @< Y.
+	dif(X, Y).
 brother(X,Y):-
 	male(X),
 	sibling(X,Y).
